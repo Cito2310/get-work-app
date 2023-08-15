@@ -4,4 +4,5 @@ export interface JobOffer {
     description:  string | null;
     location:     string | null;
     modality:     string | null;
+    title:        string | null;
 }
