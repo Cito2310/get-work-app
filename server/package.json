@@ -1,0 +1,19 @@
+{
+  "name": "get-work-app-server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently \"nodemon dist/app\" \"tsc -w\" "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^20.5.0",
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.0.1",
+    "puppeteer": "^21.0.3",
+    "typescript": "^5.1.6"
+  }
+}
