@@ -6,3 +6,7 @@ export interface JobOffer {
     modality:     string | null;
     title:        string | null;
 }
+
+export interface JobOfferWithId extends JobOffer {
+    id: number;
+}
