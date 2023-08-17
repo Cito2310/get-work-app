@@ -1,21 +1,19 @@
+import puppeteer from "puppeteer";
 import { getWorksBumeran } from "./helpers/getWorksBumeran";
 import { getWorksComputrabajo } from "./helpers/getWorksComputrabajo";
 import { writeFileSync } from "fs";
-import puppeteer from "puppeteer";
 
-
-(async () => {
+const getWorks = async() => {
     const browser = await puppeteer.launch({ headless: "new" });
     const page = await browser.newPage();
-    // page.on('console', msg => console.log(msg.text()));      // DEV - obtiene los console.log, ayuda al desarrollar
     
-    const worksBumeran = await getWorksBumeran(page);
-    const worksComputrabajo = await getWorksComputrabajo(page);
+    const worksBumeran = await getWorksBumeran(page!);
+    const worksComputrabajo = await getWorksComputrabajo(page!);
 
-    let allWorks = [...worksBumeran, ...worksComputrabajo];
-    const allWorksWithId = allWorks.map((work, index) => ({ ...work, id: index }));
+    return [...worksBumeran, ...worksComputrabajo];
+}
 
-    writeFileSync("data/data.json", JSON.stringify( allWorksWithId ), "utf-8")
-
-    console.log("DONE")
-})()
+getWorks().then( value => {
+    writeFileSync("data/works.json", JSON.stringify(value), "utf-8");
+    console.log("done");
+})
