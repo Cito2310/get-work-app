@@ -1,8 +1,10 @@
+import { JobOffer } from "./jobOffer"
+
 declare global {
     interface Window {
         electronAPI: {
             basicOnIpc: ( value: string ) => unknown,
-            basicHandleIpc: ( value: string ) => unknown,
+            getDataWorks: () => Promise<JobOffer[]>,
         }
     }
 }
