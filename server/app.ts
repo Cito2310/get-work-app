@@ -2,6 +2,7 @@ import puppeteer from "puppeteer";
 import { getWorksBumeran } from "./helpers/getWorksBumeran";
 import { getWorksComputrabajo } from "./helpers/getWorksComputrabajo";
 import { writeFileSync } from "fs";
+import { v4 as uuidv4 } from 'uuid';
 
 const getWorks = async() => {
     const browser = await puppeteer.launch({ headless: "new" });
@@ -14,6 +15,12 @@ const getWorks = async() => {
 }
 
 getWorks().then( value => {
-    writeFileSync("data/works.json", JSON.stringify(value), "utf-8");
+    const dataToWrite = {
+        data: value,
+        id: uuidv4(),
+    }
+
+
+    writeFileSync("data/works.json", JSON.stringify(dataToWrite), "utf-8");
     console.log("done");
 })
