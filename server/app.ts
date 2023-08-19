@@ -1,8 +1,13 @@
+import { writeFileSync } from "fs";
 import puppeteer from "puppeteer";
+import { v4 as uuidv4 } from 'uuid';
+
 import { getWorksBumeran } from "./helpers/getWorksBumeran";
 import { getWorksComputrabajo } from "./helpers/getWorksComputrabajo";
-import { writeFileSync } from "fs";
-import { v4 as uuidv4 } from 'uuid';
+
+import { JSONWorks } from './../types/jsonWorks';
+
+
 
 const getWorks = async() => {
     const browser = await puppeteer.launch({ headless: "new" });
@@ -14,13 +19,25 @@ const getWorks = async() => {
     return [...worksBumeran, ...worksComputrabajo];
 }
 
+
+
+const timeStart = new Date().getTime();
+
+
+
 getWorks().then( value => {
-    const dataToWrite = {
+    const dataToWrite: JSONWorks = {
         data: value,
         id: uuidv4(),
+        date: new Date(),
     }
 
-
     writeFileSync("data/works.json", JSON.stringify(dataToWrite), "utf-8");
+
     console.log("done");
+
+    const ms = new Date().getTime() - timeStart;
+    const min = Math.floor((ms/1000/60) << 0);
+    const sec = Math.floor((ms/1000) % 60);
+    console.log(`Time to finish: ${min + ':' + sec}`);
 })

@@ -1,4 +1,4 @@
-export interface JobOffer {
+export interface WorkOffer {
     url:          string | null;
     companyName:  string | null;
     description:  string | null;
@@ -7,6 +7,6 @@ export interface JobOffer {
     title:        string | null;
 }
 
-export interface JobOfferWithId extends JobOffer {
-    id: number;
+export interface WorkOfferWithStatus extends WorkOffer {
+    status: "rejected" | "accepted" | "none"
 }

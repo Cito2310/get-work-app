@@ -1,14 +1,14 @@
 import { Page } from "puppeteer";
-import { JobOffer } from "../types/jobOffer";
+import { WorkOffer } from "../../types/workOffer";
 
 
 const day = 1;
-const typeJob = "programador";
+const typeWork = "programador";
 const baseUrl = "https://www.bumeran.com.ar";
-const createURL = ( page: number ) => `${baseUrl}/empleos-publicacion-menor-a-${day}-dias-busqueda-${typeJob}.html?page=${page}`;
+const createURL = ( page: number ) => `${baseUrl}/empleos-publicacion-menor-a-${day}-dias-busqueda-${typeWork}.html?page=${page}`;
 
 
-export const getWorksBumeran = async ( page: Page ): Promise<JobOffer[]> => {
+export const getWorksBumeran = async ( page: Page ): Promise<WorkOffer[]> => {
     let allWorks = [];
     let worksFounds;
     let currentPage = 0;
@@ -22,7 +22,7 @@ export const getWorksBumeran = async ( page: Page ): Promise<JobOffer[]> => {
         await page.waitForSelector("#listado-avisos")           // espera a que la pagina y las ofertas de carguen
 
         // VARIABLE - OBTIENE UN ARRAY CON UN OBJETO DE LA INFORMACION DE LAS OFERTAS
-        const offersWorksPage: JobOffer[] = await page.evaluate( () => {
+        const offersWorksPage: WorkOffer[] = await page.evaluate( () => {
             const div = document.querySelector("#listado-avisos");  // esta es la seccion que contienete todos las ofertas de trabajo
             const children = Array.from(div!.children);             // obtiene todos los hijos de la seccion anterior
     
@@ -33,7 +33,7 @@ export const getWorksBumeran = async ( page: Page ): Promise<JobOffer[]> => {
             const onlyOffers = sectionOffers.slice (0, sectionOffers.length-1 ); // elimina la parte inutil que se encontraba al final del array
     
     
-            const parseOffers: JobOffer[] = onlyOffers.map( elementArchor => {
+            const parseOffers: WorkOffer[] = onlyOffers.map( elementArchor => {
                 const children = Array.from( elementArchor!.children );
 
                 const url = elementArchor?.getAttribute("href");      // obtiene el url de la oferta

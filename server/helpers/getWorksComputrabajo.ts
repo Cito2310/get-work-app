@@ -1,14 +1,14 @@
 import { Page } from "puppeteer"
-import { JobOffer } from './../types/jobOffer';
+import { WorkOffer } from "../../types/workOffer";
 
 
 const day = 1;
-const typeJob = "programador";
+const typeWork = "programador";
 const baseUrl = "https://ar.computrabajo.com";
-const createURL = ( page: number ) => `${baseUrl}/trabajo-de-${typeJob}?pubdate=${day}&p=${page}`;
+const createURL = ( page: number ) => `${baseUrl}/trabajo-de-${typeWork}?pubdate=${day}&p=${page}`;
 
 
-export const getWorksComputrabajo = async (page: Page): Promise<JobOffer[]> => {
+export const getWorksComputrabajo = async (page: Page): Promise<WorkOffer[]> => {
     let allWorks = [];
     let worksFounds;
     let currentPage = 0;
