@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { TopBar } from "./components/TopBar";
+import { AppRouter } from "./router/AppRouter";
 
 function App() {
 
@@ -12,11 +13,9 @@ function App() {
 
   return (
     <div className="App p-3 bg-slate-200">
-      <button className="bg-blue-500 text-white p-2 rounded shadow hover:brightness-90 mb-3" onClick={()=>{}}>Seleccionar datos</button>
-
-      <section className="flex row flex-wrap gap-3">
-        Hola
-      </section>
+      <TopBar />
+      
+      <AppRouter />
     </div>
   );
 }
