@@ -2,7 +2,7 @@ import { JSONWorks } from './../../../../types/jsonWorks';
 import { WorkOfferWithStatus } from './../../../../types/workOffer';
 import { createSlice } from '@reduxjs/toolkit';
 
-interface workState {
+interface WorkState {
     data: WorkOfferWithStatus[];
     date: Date | null;
     id: string | null;
@@ -11,7 +11,7 @@ interface workState {
     }
 }
 
-const initialState: workState = {
+const initialState: WorkState = {
     data: [],
     date: null,
     id: null,
@@ -24,6 +24,14 @@ export const workSlice = createSlice({
     name: "work",
     initialState,
     reducers: {
+
+        setWorksLocalStorage: ( state, action: { payload: WorkState } ) => {
+            const { data, date, id, status } = action.payload;
+            state.data = data;
+            state.date = date;
+            state.id = id;
+            state.status = status;
+        },
 
         setWorks: ( state, action: { payload: JSONWorks } ) => {
             const { data, date, id } = action.payload;
@@ -49,13 +57,17 @@ export const workSlice = createSlice({
         },
 
         updateStatus: ( state, action: { payload: {
-            urlWork: string,
-            newStatus: "none" | "rejected" | "accepted" ,
+            urlWork: string;
+            newStatus: "none" | "rejected" | "accepted";
 
         }}) => {
             
-            const work = state.data.find( work => work.url === action.payload.urlWork );
-            work?.status === action.payload.newStatus;
+            state.data = state.data.map( work => {
+                if ( work.url === action.payload.urlWork ) return { ...work, status: action.payload.newStatus };
+                return work;
+            })
+
+            window.localStorage.setItem("state-work", JSON.stringify( state ));
 
         }
 
@@ -67,6 +79,7 @@ export const workSlice = createSlice({
 export const {
     setWorks,
     addWorks,
-    updateStatus
+    updateStatus,
+    setWorksLocalStorage
 
 } = workSlice.actions;
