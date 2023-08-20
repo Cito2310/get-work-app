@@ -33,12 +33,12 @@ export const ItemWorkFilter = ({ work, onlyRejected }: props) => {
                     <p className='font-Montserrat text-xs text-right whitespace-nowrap'>{`${location} - ${modality}`}</p>
                 </div>
 
-                <p className='text-sm h-12'>{ description }</p>
+                <p className='text-sm'>{ description }</p>
             </div>
 
             <div className='flex flex-col gap-3'>
-                { !onlyRejected && <button className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-full rounded shadow bg-gray-100' onClick={ onRejected }>Rechazar</button>}
-                <button className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-full rounded shadow bg-main' onClick={ onAccepted }>Aceptar</button>
+                { !onlyRejected && <button className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-full rounded p-1 shadow bg-gray-100' onClick={ onRejected }>Rechazar</button>}
+                <button className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-full rounded p-1 shadow bg-main' onClick={ onAccepted }>Aceptar</button>
             </div>
         </li>
     )
