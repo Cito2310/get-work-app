@@ -4,9 +4,10 @@ import { updateStatus } from '../store/work/workSlice';
 
 interface props {
     work: WorkOfferWithStatus;
+    onlyRejected?: boolean;
 }
 
-export const ItemWorkFilter = ({ work }: props) => {
+export const ItemWorkFilter = ({ work, onlyRejected }: props) => {
     const { companyName, description, location, modality, status, title, url } = work; 
     const dispatch = useAppDispatch();
 
@@ -16,8 +17,7 @@ export const ItemWorkFilter = ({ work }: props) => {
     }
 
     const onAccepted = () => {
-        console.log(work)
-        // dispatch( updateStatus({ urlWork: url, newStatus: "accepted" }) )
+        dispatch( updateStatus({ urlWork: url, newStatus: "accepted" }) )
     }
 
 
@@ -37,8 +37,8 @@ export const ItemWorkFilter = ({ work }: props) => {
             </div>
 
             <div className='flex flex-col gap-3'>
-                <button className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-8 rounded shadow bg-gray-100' onClick={ onRejected }>Rechazar</button>
-                <button className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-8 rounded shadow bg-main' onClick={ onAccepted }>Aceptar</button>
+                { !onlyRejected && <button className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-full rounded shadow bg-gray-100' onClick={ onRejected }>Rechazar</button>}
+                <button className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-full rounded shadow bg-main' onClick={ onAccepted }>Aceptar</button>
             </div>
         </li>
     )
