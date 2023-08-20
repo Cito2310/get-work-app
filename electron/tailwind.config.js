@@ -6,19 +6,7 @@ export default {
     theme: {
       extend: {
         colors: {
-            "card_bg"       : "#ffffff",
-            "card_btn"      : "#e0e0e0",
-            "card_btnText"  : "#b2b2b2",
-            "danger"        : "#ff0000",
-            "done"          : "#00ff00",
-
-            "btn_primary"   : "#4F46E5",
-            "btn_danger"    : "#DC3545",
-            "btn_secondary" : "#e0e0e0",
-            
-            "input_border"  : "#e0e0e0",
-
-            "txt-black"     : "#374151",
+            "main"       : "#FFAB49",
         },
         fontFamily: {
             // sans: ["Mulish", "Montserrat", "Arial", "Helvetica", "sans-serif"],

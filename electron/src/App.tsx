@@ -10,7 +10,7 @@ function App() {
   const state = useAppSelector( state => state.work);
 
   return (
-    <div className="App p-3 bg-slate-200">
+    <div className="App">
       <TopBar />
 
       <AppRouter />

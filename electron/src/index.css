@@ -21,4 +21,11 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
+
+  
+}
+
+
+a.active {
+    background-color: #ffffff38;
 }
