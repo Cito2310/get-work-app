@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../store/store"
 import { updateStatus } from "../store/work/workSlice";
+import { ItemWorkFilter } from "../components/ItemWorkFilter";
 
 export const FilterWorksPage = () => {
     const { data } = useAppSelector( state => state.work )
@@ -24,30 +25,13 @@ export const FilterWorksPage = () => {
     <section>
         <button onClick={ onOnlyRejected } > Ver unicamente rechazados </button>
 
-        {
-            onlyRejected 
-            ? data.map( work => {
-                if ( work.status === "rejected" ) return (
-                    <article key={ work.url }>
-                        { JSON.stringify( work ) }
-                        <br/>
-                        <button onClick={() => onRejected(work.url)} >Rechazar</button>
-                        <button onClick={() => onAccepted(work.url)} >Aceptar</button>
-                        <hr className="border border-black"/>
-                    </article>
-                )})
-
-            : data.map( work => {
-                if ( work.status === "none" ) return (
-                    <article key={ work.url }>
-                        { JSON.stringify( work ) }
-                        <br/>
-                        <button onClick={() => onRejected(work.url)} >Rechazar</button>
-                        <button onClick={() => onAccepted(work.url)} >Aceptar</button>
-                        <hr className="border border-black"/>
-                    </article>
-                )})
-        }
+        <div className="flex flex-col gap-2 px-12 py-3 bg-[#f0f0f0]">
+            {
+                onlyRejected 
+                ? data.map( work => (work.status === "rejected") && <ItemWorkFilter work={ work } key={ work.url } /> )
+                : data.map( work => (work.status === "none") && <ItemWorkFilter work={ work } key={ work.url } /> )
+            }
+        </div>
     </section>
   )
 }
