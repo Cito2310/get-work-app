@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, shell } from 'electron';
 import * as path from 'path';
 
 import { ipConnection } from './ipcConnection';

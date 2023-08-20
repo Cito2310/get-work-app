@@ -1,28 +1,16 @@
-import { useAppDispatch, useAppSelector } from "../store/store"
-import { updateStatus } from "../store/work/workSlice";
+import { ItemWork } from "../components/ItemWork";
+import { useAppSelector } from "../store/store"
 
 export const WorksPage = () => {
     const { data } = useAppSelector( state => state.work )
-    const dispatch = useAppDispatch();
 
-    const onRejected = ( url: string ) => {
-        dispatch( updateStatus({ urlWork: url, newStatus: "rejected" }) )
-    }
-
-
-  return (
-    <section>
-        {
-            data.map( work => {
-                if ( work.status === "accepted" ) return (
-                    <article key={ work.url }>
-                        { JSON.stringify( work ) }
-                        <button onClick={ () => onRejected( work.url ) } >Eliminar</button>
-                        <hr className="border border-black"/>
-                    </article>
-                )
-            })
-        }
-    </section>
-  )
+    return (
+        <section>
+            <div className="flex flex-col gap-3 px-16 py-3 bg-[#f0f0f0]">
+                {
+                    data.map( work => (work.status === "accepted") && <ItemWork work={ work } key={ work.url } /> )
+                }
+            </div>
+        </section>
+    )
 }

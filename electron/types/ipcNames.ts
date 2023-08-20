@@ -1,4 +1,3 @@
 export type ipcNames = 
-    "basic-on-ipc" |
-    "basic-handle-ipc" |
+    "redirect" |
     "get-data-works"
