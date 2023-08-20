@@ -40,4 +40,6 @@ getWorks().then( value => {
     const min = Math.floor((ms/1000/60) << 0);
     const sec = Math.floor((ms/1000) % 60);
     console.log(`Time to finish: ${min + ':' + sec}`);
+
+    process.exit();
 })

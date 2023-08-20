@@ -36,15 +36,15 @@ export const getWorksBumeran = async ( page: Page ): Promise<WorkOffer[]> => {
             const parseOffers: WorkOffer[] = onlyOffers.map( elementArchor => {
                 const children = Array.from( elementArchor!.children );
 
-                const url = elementArchor?.getAttribute("href");      // obtiene el url de la oferta
+                const url = String( elementArchor!.getAttribute("href") );      // obtiene el url de la oferta
                 const companyName = children.map( child => child.querySelector("h3")?.textContent )[0];     // obtiene el nombre de la compania
                 const description = children.map( child => child.querySelector("p")?.textContent )[0];      // obtiene la descripcion basica del trabajo
     
                 // OBTENER EL TITULO DEL TRABAJO
                 const title = children.map( child => {
                     const h3 = child.querySelectorAll("h3");
-                    if ( h3[2]?.textContent === " -" ) return h3[4]?.textContent;
-                    return h3[2]?.textContent;
+                    if ( h3[2]?.textContent === " -" ) return String( h3[4]!.textContent );
+                    return String( h3[2]!.textContent );
                 })[0];
 
                 // OBTENER LA LOCACION DEL TRABAJO
@@ -56,8 +56,8 @@ export const getWorksBumeran = async ( page: Page ): Promise<WorkOffer[]> => {
                 const modality = officeIconElement?.nextElementSibling?.textContent         // obtener el elemento hermano del icono, el cual es un H3 con la modalidad y obtener el texto
     
                 return {
-                    title: title || null,
-                    url: url || null,
+                    title: title,
+                    url: url,
                     companyName: companyName || null,
                     description: description || null,
                     location: location || null,

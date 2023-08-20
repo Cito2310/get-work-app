@@ -39,8 +39,8 @@ export const getWorksComputrabajo = async (page: Page): Promise<WorkOffer[]> => 
                     const location = removedNumber?.length === 2 ? removedNumber[1] : removedNumber![0];
                     
                     return {
-                        title: title || null,
-                        url: url || null,
+                        title: title || "",
+                        url: url || "",
                         companyName: companyName || null,
                         modality: modality || null,
                         location: location || null,
