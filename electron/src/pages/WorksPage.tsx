@@ -6,7 +6,7 @@ export const WorksPage = () => {
 
     return (
         <section>
-            <div className="flex flex-col gap-3 px-16 py-3 bg-[#f0f0f0]">
+            <div className="flex flex-col gap-3 px-16 py-3">
                 {
                     data.map( work => (work.status === "accepted") && <ItemWork work={ work } key={ work.url } /> )
                 }

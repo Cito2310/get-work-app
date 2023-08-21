@@ -21,7 +21,7 @@ export const FilterWorksPage = () => {
             }
         </div>
 
-        <div className="flex flex-col gap-3 px-16 py-3 bg-[#f0f0f0]">
+        <div className="flex flex-col gap-3 px-16 py-3">
             {
                 onlyRejected 
                 ? data.map( work => (work.status === "rejected") && <ItemWorkFilter onlyRejected work={ work } key={ work.url } /> )
