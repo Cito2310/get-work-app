@@ -1,23 +1,19 @@
-import { TopBar } from "./components/TopBar";
-import { useGetData } from "./hooks/useGetData";
 import { AppRouter } from "./router/AppRouter";
-import { useAppSelector } from "./store/store";
+import { TopBar } from "./components";
+import { useGetData } from "./hooks";
+
+import "./index.css"
 
 function App() {
+    useGetData();
 
-  useGetData();
+    return (
+        <div className="App">
+        <TopBar />
 
-  const state = useAppSelector( state => state.work);
-
-  return (
-    <div className="App">
-      <TopBar />
-
-      <AppRouter />
-
-      {/* <code>{ JSON.stringify( state ) }</code> */}
-    </div>
-  );
+        <AppRouter />
+        </div>
+    );
 }
 
 export default App;

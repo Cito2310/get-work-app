@@ -1,7 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import { SelectDataPage } from '../pages/SelectDataPage';
-import { FilterWorksPage } from '../pages/FilterWorksPage';
-import { WorksPage } from '../pages/WorksPage';
+import { SelectDataPage, FilterWorksPage, WorksPage } from '../pages';
 
 export const AppRouter = () => {
   return (

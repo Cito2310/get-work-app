@@ -1,9 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../store/store';
-import { startGetWorks } from '../store/work/thunks';
-import { ItemEmpty } from '../components/ItemEmpty';
-import { ContainerSelectData } from '../components/ContainerSelectData';
-import { useDeleteOverflow } from '../hooks/useDeleteOverflow';
+import { useAppDispatch, startGetWorks } from '../store';
+import { ItemEmpty, ContainerSelectData } from '../components';
+import { useDeleteOverflow } from '../hooks';
 
 export const SelectDataPage = () => {
     const navigate = useNavigate();

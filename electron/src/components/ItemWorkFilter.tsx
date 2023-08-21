@@ -1,6 +1,5 @@
 import { WorkOfferWithStatus } from '../../../types/workOffer'
-import { useAppDispatch } from '../store/store';
-import { updateStatus } from '../store/work/workSlice';
+import { useAppDispatch, updateStatus } from '../store';
 
 interface props {
     work: WorkOfferWithStatus;

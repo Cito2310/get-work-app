@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-import { useAppDispatch } from '../store/store';
-import { setWorksLocalStorage } from '../store/work/workSlice';
+import { useAppDispatch, setWorksLocalStorage } from '../store';
 
 export const useGetData = () => {
     const dispatch = useAppDispatch();

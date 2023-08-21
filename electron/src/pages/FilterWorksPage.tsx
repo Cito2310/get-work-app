@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { useAppSelector } from "../store/store"
-import { ItemWorkFilter } from "../components/ItemWorkFilter";
-import { Icons } from "../components/Icons";
+import { useAppSelector } from "../store"
+import { ItemWorkFilter, Icons } from "../components";
 
 export const FilterWorksPage = () => {
     const { data } = useAppSelector( state => state.work )
@@ -21,13 +20,13 @@ export const FilterWorksPage = () => {
             }
         </div>
 
-        <div className="flex flex-col gap-3 px-16 py-3">
+        <ul className="flex flex-col gap-3 px-16 py-3">
             {
                 onlyRejected 
                 ? data.map( work => (work.status === "rejected") && <ItemWorkFilter onlyRejected work={ work } key={ work.url } /> )
                 : data.map( work => (work.status === "none") && <ItemWorkFilter work={ work } key={ work.url } /> )
             }
-        </div>
+        </ul>
     </section>
   )
 }
