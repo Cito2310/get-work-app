@@ -8,7 +8,7 @@ export const AppRouter = () => {
             <Route path='/selectData' element={ <SelectDataPage /> } />
             <Route path='/filterWorks' element={ <FilterWorksPage /> } />
             <Route path='/works' element={ <WorksPage /> } />
-            <Route path='/*' element={<Navigate to={"/works"} />} />
+            <Route path='/*' element={<Navigate to={"/selectData"} />} />
         </Routes>
     </>
   )
