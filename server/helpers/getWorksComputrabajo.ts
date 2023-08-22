@@ -3,12 +3,13 @@ import { WorkOffer } from "../../types/workOffer";
 
 
 const day = 1;
-const typeWork = "programador";
 const baseUrl = "https://ar.computrabajo.com";
-const createURL = ( page: number ) => `${baseUrl}/trabajo-de-${typeWork}?pubdate=${day}&p=${page}`;
 
 
-export const getWorksComputrabajo = async (page: Page): Promise<WorkOffer[]> => {
+export const getWorksComputrabajo = async (page: Page, typeWork: string): Promise<WorkOffer[]> => {
+    const createURL = ( page: number ) => `${baseUrl}/trabajo-de-${typeWork}?pubdate=${day}&p=${page}`;
+
+
     let allWorks = [];
     let worksFounds;
     let currentPage = 0;

@@ -3,12 +3,12 @@ import { WorkOffer } from "../../types/workOffer";
 
 
 const day = 1;
-const typeWork = "programador";
 const baseUrl = "https://www.bumeran.com.ar";
-const createURL = ( page: number ) => `${baseUrl}/empleos-publicacion-menor-a-${day}-dias-busqueda-${typeWork}.html?page=${page}`;
 
 
-export const getWorksBumeran = async ( page: Page ): Promise<WorkOffer[]> => {
+export const getWorksBumeran = async ( page: Page, typeWork: string ): Promise<WorkOffer[]> => {
+    const createURL = ( page: number ) => `${baseUrl}/empleos-publicacion-menor-a-${day}-dias-busqueda-${typeWork}.html?page=${page}`;
+
     let allWorks = [];
     let worksFounds;
     let currentPage = 0;

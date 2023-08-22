@@ -13,10 +13,23 @@ const getWorks = async() => {
     const browser = await puppeteer.launch({ headless: "new" });
     const page = await browser.newPage();
     
-    const worksBumeran = await getWorksBumeran(page!);
-    const worksComputrabajo = await getWorksComputrabajo(page!);
+    const worksProgramadorBumeran = await getWorksBumeran(page!, "programador");
+    const worksProgramadorComputrabajo = await getWorksComputrabajo(page!, "programador");
 
-    return [...worksBumeran, ...worksComputrabajo];
+    const worksReactBumeran = await getWorksBumeran(page!, "react");
+    const worksReactComputrabajo = await getWorksComputrabajo(page!, "react");
+
+    const worksNodejsBumeran = await getWorksBumeran(page!, "nodejs");
+    const worksNodejsComputrabajo = await getWorksComputrabajo(page!, "nodejs");
+
+    return [
+        ...worksProgramadorBumeran,
+        ...worksProgramadorComputrabajo,
+        ...worksReactBumeran,
+        ...worksReactComputrabajo,
+        ...worksNodejsBumeran,
+        ...worksNodejsComputrabajo,
+    ];
 }
 
 
@@ -35,6 +48,7 @@ getWorks().then( value => {
     writeFileSync("data/works.json", JSON.stringify(dataToWrite), "utf-8");
 
     console.log("done");
+    console.log(`Length size: ${value.length}`)
 
     const ms = new Date().getTime() - timeStart;
     const min = Math.floor((ms/1000/60) << 0);
