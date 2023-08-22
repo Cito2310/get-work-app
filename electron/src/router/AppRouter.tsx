@@ -3,13 +3,11 @@ import { SelectDataPage, FilterWorksPage, WorksPage } from '../pages';
 
 export const AppRouter = () => {
   return (
-    <>
-        <Routes>
-            <Route path='/selectData' element={ <SelectDataPage /> } />
-            <Route path='/filterWorks' element={ <FilterWorksPage /> } />
-            <Route path='/works' element={ <WorksPage /> } />
-            <Route path='/*' element={<Navigate to={"/selectData"} />} />
-        </Routes>
-    </>
+    <Routes>
+        <Route path='/selectData' element={ <SelectDataPage /> } />
+        <Route path='/filterWorks' element={ <FilterWorksPage /> } />
+        <Route path='/works' element={ <WorksPage /> } />
+        <Route path='/*' element={<Navigate to={"/selectData"} />} />
+    </Routes>
   )
 }

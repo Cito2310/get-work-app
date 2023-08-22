@@ -1,13 +1,22 @@
 import { useState } from "react";
 import { useAppSelector } from "../store"
 import { ItemWorkFilter, Icons, ContainerNotWork } from "../components";
+import { joinTextWork } from "../helpers/joinTextWork";
 
 export const FilterWorksPage = () => {
-    const { data } = useAppSelector( state => state.work )
+    const { data } = useAppSelector( state => state.work );
+    const { currentSearch } = useAppSelector( state => state.search );
     const [onlyRejected, setOnlyRejected] = useState(false);
 
     const onOnlyRejected = () => {
         setOnlyRejected(!onlyRejected)
+    }
+
+    const dataElement = ( filter?: boolean ) => {
+        const dataSelect = filter ? data.filter( work => RegExp( currentSearch, "i" ).test( joinTextWork(work) ) ) : data;
+
+        if ( onlyRejected ) return dataSelect.map( work => (work.status === "rejected") && <ItemWorkFilter onlyRejected work={ work } key={ work.url } /> );
+        return dataSelect.map( work => (work.status === "none") && <ItemWorkFilter work={ work } key={ work.url } /> )
     }
 
   return (
@@ -23,12 +32,7 @@ export const FilterWorksPage = () => {
         <ul className="flex flex-col gap-3 px-16 py-3">
             { data.length === 0 && <ContainerNotWork label="No has seleccionado ningun dato" /> }
 
-
-            {
-                onlyRejected 
-                ? data.map( work => (work.status === "rejected") && <ItemWorkFilter onlyRejected work={ work } key={ work.url } /> )
-                : data.map( work => (work.status === "none") && <ItemWorkFilter work={ work } key={ work.url } /> )
-            }
+            { currentSearch ? dataElement(true) : dataElement() }
         </ul>
     </section>
   )
