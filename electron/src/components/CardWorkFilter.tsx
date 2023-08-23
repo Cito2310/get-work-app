@@ -1,24 +1,17 @@
-import { WorkOfferWithStatus } from '../../../types/workOffer'
+import { WorkOfferExpand } from '../../../types';
 import { useAppDispatch, updateStatus } from '../store';
 
 interface props {
-    work: WorkOfferWithStatus;
+    work: WorkOfferExpand;
     onlyRejected?: boolean;
 }
 
-export const ItemWorkFilter = ({ work, onlyRejected }: props) => {
+export const CardWorkFilter = ({ work, onlyRejected }: props) => {
     const { companyName, description, location, modality, status, title, url } = work; 
     const dispatch = useAppDispatch();
 
-
-    const onRejected = () => {
-        dispatch( updateStatus({ urlWork: url, newStatus: "rejected" }) )
-    }
-
-    const onAccepted = () => {
-        dispatch( updateStatus({ urlWork: url, newStatus: "accepted" }) )
-    }
-
+    const onRejected = () => dispatch( updateStatus({ urlWork: url, newStatus: "rejected" }) )
+    const onAccepted = () => dispatch( updateStatus({ urlWork: url, newStatus: "accepted" }) )
 
     return (
         <li className='list-none flex w-full justify-between gap-8 shadow-md rounded-md p-3 bg-white'>

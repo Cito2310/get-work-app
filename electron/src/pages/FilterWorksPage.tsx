@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppSelector } from "../store"
-import { ItemWorkFilter, Icons, ContainerNotWork } from "../components";
+import { CardWorkFilter, Icons, ModalNotWork } from "../components";
 import { joinTextWork } from "../helpers/joinTextWork";
 
 export const FilterWorksPage = () => {
@@ -15,8 +15,8 @@ export const FilterWorksPage = () => {
     const dataElement = ( filter?: boolean ) => {
         const dataSelect = filter ? data.filter( work => RegExp( currentSearch, "i" ).test( joinTextWork(work) ) ) : data;
 
-        if ( onlyRejected ) return dataSelect.map( work => (work.status === "rejected") && <ItemWorkFilter onlyRejected work={ work } key={ work.url } /> );
-        return dataSelect.map( work => (work.status === "none") && <ItemWorkFilter work={ work } key={ work.url } /> )
+        if ( onlyRejected ) return dataSelect.map( work => (work.status === "rejected") && <CardWorkFilter onlyRejected work={ work } key={ work.url } /> );
+        return dataSelect.map( work => (work.status === "none") && <CardWorkFilter work={ work } key={ work.url } /> )
     }
 
   return (
@@ -30,7 +30,7 @@ export const FilterWorksPage = () => {
         </div>
 
         <ul className="flex flex-col gap-3 px-16 py-3">
-            { data.length === 0 && <ContainerNotWork label="No has seleccionado ningun dato" /> }
+            { data.length === 0 && <ModalNotWork label="No has seleccionado ningun dato" /> }
 
             { currentSearch ? dataElement(true) : dataElement() }
         </ul>

@@ -6,7 +6,8 @@ export const useGetData = () => {
 
     useEffect(() => {
         const dataInLocalStorage = window.localStorage.getItem("state-work");
-        const dataParse = JSON.parse( dataInLocalStorage || "null" );
-        if ( dataParse ) dispatch( setWorksLocalStorage( dataParse ) );
+        if ( !dataInLocalStorage ) return;
+        const dataParse = JSON.parse( dataInLocalStorage );
+        dispatch( setWorksLocalStorage( dataParse ) );
     }, [])
 }

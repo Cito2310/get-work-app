@@ -1,9 +1,8 @@
-import { JSONWorks } from './../../../../types/jsonWorks';
-import { WorkOfferWithStatus } from './../../../../types/workOffer';
 import { createSlice } from '@reduxjs/toolkit';
+import { JSONWorks, WorkOfferExpand } from '../../../../types/';
 
 interface WorkState {
-    data: WorkOfferWithStatus[];
+    data: WorkOfferExpand[];
     date: Date | null;
     id: string | null;
     status: {
@@ -35,23 +34,12 @@ export const workSlice = createSlice({
 
         setWorks: ( state, action: { payload: JSONWorks } ) => {
             const { data, date, id } = action.payload;
-            const dataWithStatus: WorkOfferWithStatus[] = data.map( (work) => ({ ...work, status: "none" }));
-
+            const dataWithStatus: WorkOfferExpand[] = data.map( work => ({ ...work, status: "none", viewed: false }))
+            
             state.data = dataWithStatus;
             state.date = new Date( date );
             state.id = id;
             state.status.dataExists = true;
-
-            window.localStorage.setItem("state-work", JSON.stringify(state));
-        },
-
-        addWorks: ( state, action: { payload: JSONWorks } ) => {
-            const { data, date, id } = action.payload;
-            const dataWithStatus: WorkOfferWithStatus[] = data.map( (work) => ({ ...work, status: "none" }));
-
-            state.data.push( ...dataWithStatus );
-            state.date = new Date( date );
-            state.id = id;
 
             window.localStorage.setItem("state-work", JSON.stringify(state));
         },
@@ -69,6 +57,16 @@ export const workSlice = createSlice({
 
             window.localStorage.setItem("state-work", JSON.stringify( state ));
 
+        },
+
+        updateViewed: ( state, action: { payload: { urlWork: string; newState: boolean }} ) => {
+            const { newState, urlWork } = action.payload;
+            state.data = state.data.map( work => {
+                if ( work.url === urlWork ) return { ...work, viewed: newState };
+                return work;
+            })
+
+            window.localStorage.setItem("state-work", JSON.stringify( state ));
         }
 
     }
@@ -78,8 +76,8 @@ export const workSlice = createSlice({
 
 export const {
     setWorks,
-    addWorks,
     updateStatus,
+    updateViewed,
     setWorksLocalStorage
 
 } = workSlice.actions;

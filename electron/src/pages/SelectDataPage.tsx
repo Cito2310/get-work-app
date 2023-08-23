@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, startGetWorks } from '../store';
-import { ItemEmpty, ContainerSelectData } from '../components';
+import { CardEmpty, ModalSelectData } from '../components';
 import { useDeleteOverflow } from '../hooks';
 
 export const SelectDataPage = () => {
@@ -20,21 +20,21 @@ export const SelectDataPage = () => {
       <div className='absolute w-screen h-screen bg-[#00000020]'></div>
       
       <ul className='flex flex-col gap-3 px-16 py-3'>
-        <ItemEmpty />
-        <ItemEmpty />
-        <ItemEmpty />
-        <ItemEmpty />
-        <ItemEmpty />
-        <ItemEmpty />
-        <ItemEmpty />
-        <ItemEmpty />
-        <ItemEmpty />
-        <ItemEmpty />
-        <ItemEmpty />
-        <ItemEmpty />
+        <CardEmpty />
+        <CardEmpty />
+        <CardEmpty />
+        <CardEmpty />
+        <CardEmpty />
+        <CardEmpty />
+        <CardEmpty />
+        <CardEmpty />
+        <CardEmpty />
+        <CardEmpty />
+        <CardEmpty />
+        <CardEmpty />
       </ul>
 
-      <ContainerSelectData onSelectData={ onSelectData } />
+      <ModalSelectData onSelectData={ onSelectData } />
     </section>
   )
 }

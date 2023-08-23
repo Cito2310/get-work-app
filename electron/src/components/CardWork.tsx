@@ -1,16 +1,18 @@
-import { WorkOfferWithStatus } from '../../../types/workOffer'
+import { WorkOfferExpand } from "../../../types";
+import { updateViewed, useAppDispatch } from "../store";
 
 interface props {
-    work: WorkOfferWithStatus;
+    work: WorkOfferExpand;
 }
 
-export const ItemWork = ({ work }: props) => {
-    const { companyName, description, location, modality, status, title, url } = work; 
+export const CardWork = ({ work }: props) => {
+    const { companyName, description, location, modality, status, title, url, viewed } = work; 
+    const dispatch = useAppDispatch();
 
     const onRedirect = () => {
+        dispatch( updateViewed({ urlWork: work.url, newState: true }) );
         window.electronAPI.redirect( url );
-    }
-
+    };
 
     return (
         <li className='list-none flex w-full justify-between gap-8 shadow-md rounded-md p-3 bg-white'>
@@ -28,7 +30,12 @@ export const ItemWork = ({ work }: props) => {
             </div>
 
             <div className='flex flex-col gap-3'>
-                <button className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-full rounded p-1 shadow bg-main' onClick={ onRedirect }>Link</button>
+                <button 
+                    className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-full rounded p-1 shadow bg-main' 
+                    onClick={ onRedirect }
+                >
+                    {viewed ? "\u2713 Link" : "Link"}
+                </button>
             </div>
         </li>
     )
