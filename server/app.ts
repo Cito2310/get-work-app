@@ -2,10 +2,9 @@ import { writeFileSync } from "fs";
 import puppeteer from "puppeteer";
 import { v4 as uuidv4 } from 'uuid';
 
-import { getWorksBumeran } from "./helpers/getWorksBumeran";
-import { getWorksComputrabajo } from "./helpers/getWorksComputrabajo";
+import { getWorksBumeran, getWorksComputrabajo } from "./helpers";
 
-import { JSONWorks } from './../types/jsonWorks';
+import { JSONWorks, WorkOffer } from './../types';
 
 
 
@@ -37,18 +36,25 @@ const getWorks = async() => {
 const timeStart = new Date().getTime();
 
 
-
 getWorks().then( value => {
+    const valueNotRepeat = value.reduce(( prev: WorkOffer[], curr: WorkOffer )=>{
+        const existSameUrl = prev.some( work => work.url === curr.url );
+        if ( !existSameUrl ) prev.push(curr);
+        return prev;
+    }, [])
+
     const dataToWrite: JSONWorks = {
-        data: value,
+        data: valueNotRepeat,
         id: uuidv4(),
         date: new Date(),
     }
 
+    
+
     writeFileSync("data/works.json", JSON.stringify(dataToWrite), "utf-8");
 
     console.log("done");
-    console.log(`Length size: ${value.length}`)
+    console.log(`Length size: ${valueNotRepeat.length}`)
 
     const ms = new Date().getTime() - timeStart;
     const min = Math.floor((ms/1000/60) << 0);
