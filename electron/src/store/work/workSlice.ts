@@ -3,8 +3,6 @@ import { JSONWorks, WorkOfferExpand } from '../../../../types/';
 
 interface WorkState {
     data: WorkOfferExpand[];
-    date: Date | null;
-    id: string | null;
     status: {
         dataExists: boolean;
     }
@@ -12,8 +10,6 @@ interface WorkState {
 
 const initialState: WorkState = {
     data: [],
-    date: null,
-    id: null,
     status: {
         dataExists: false,
     }
@@ -25,30 +21,18 @@ export const workSlice = createSlice({
     reducers: {
 
         setWorksLocalStorage: ( state, action: { payload: WorkState } ) => {
-            const { data, date, id, status } = action.payload;
-            state.data = data;
-            state.date = date;
-            state.id = id;
-            state.status = status;
+            state.data = action.payload.data;
+            state.status = action.payload.status;
         },
 
-        setWorks: ( state, action: { payload: JSONWorks } ) => {
-            const { data, date, id } = action.payload;
-            const dataWithStatus: WorkOfferExpand[] = data.map( work => ({ ...work, status: "none", viewed: false }))
-            
-            state.data = dataWithStatus;
-            state.date = new Date( date );
-            state.id = id;
+        setWorks: ( state, action: { payload: WorkOfferExpand[] } ) => {
+            state.data = action.payload;
             state.status.dataExists = true;
 
             window.localStorage.setItem("state-work", JSON.stringify(state));
         },
 
-        updateStatus: ( state, action: { payload: {
-            urlWork: string;
-            newStatus: "none" | "rejected" | "accepted";
-
-        }}) => {
+        updateStatus: ( state, action: { payload: { urlWork: string; newStatus: "none" | "rejected" | "accepted" }}) => {
             
             state.data = state.data.map( work => {
                 if ( work.url === action.payload.urlWork ) return { ...work, status: action.payload.newStatus };
