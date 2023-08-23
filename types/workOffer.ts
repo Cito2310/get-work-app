@@ -6,7 +6,3 @@ export interface WorkOffer {
     modality:     string | null;
     title:        string;
 }
-
-export interface WorkOfferWithStatus extends WorkOffer {
-    status: "rejected" | "accepted" | "none"
-}
