@@ -1,5 +1,6 @@
-import { WorkOfferExpand } from "../../../types";
-import { updateViewed, useAppDispatch } from "../store";
+import { WorkOfferExpand } from "../../../../types";
+import { updateViewed, useAppDispatch } from "../../store";
+import { BaseCard } from "./BaseCard";
 
 interface props {
     work: WorkOfferExpand;
@@ -15,7 +16,7 @@ export const CardWork = ({ work }: props) => {
     };
 
     return (
-        <li className='list-none flex w-full justify-between gap-8 shadow-md rounded-md p-3 bg-white'>
+        <BaseCard className="justify-between gap-8">
             <div className='w-full'>
                 <div className='flex justify-between gap-3'>
                     {
@@ -37,6 +38,6 @@ export const CardWork = ({ work }: props) => {
                     {viewed ? "\u2713 Link" : "Link"}
                 </button>
             </div>
-        </li>
+        </BaseCard>
     )
 }

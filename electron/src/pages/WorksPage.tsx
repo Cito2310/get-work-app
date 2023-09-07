@@ -1,6 +1,6 @@
 import { useAppSelector } from "../store"
 import { CardWork } from "../components";
-import { ModalNotWork } from "../components/ModalNotWork";
+import { ModalNotWork } from "../components/modal/ModalNotWork";
 import { joinTextWork } from "../helpers/joinTextWork";
 
 export const WorksPage = () => {

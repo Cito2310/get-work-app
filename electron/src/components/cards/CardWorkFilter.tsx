@@ -1,5 +1,6 @@
-import { WorkOfferExpand } from '../../../types';
-import { useAppDispatch, updateStatus } from '../store';
+import { WorkOfferExpand } from '../../../../types';
+import { useAppDispatch, updateStatus } from '../../store';
+import { BaseCard } from './BaseCard';
 
 interface props {
     work: WorkOfferExpand;
@@ -14,7 +15,7 @@ export const CardWorkFilter = ({ work, onlyRejected }: props) => {
     const onAccepted = () => dispatch( updateStatus({ urlWork: url, newStatus: "accepted" }) )
 
     return (
-        <li className='list-none flex w-full justify-between gap-8 shadow-md rounded-md p-3 bg-white'>
+        <BaseCard className='justify-between gap-8'>
             <div className='w-full'>
                 <div className='flex justify-between gap-3'>
                     {
@@ -32,6 +33,6 @@ export const CardWorkFilter = ({ work, onlyRejected }: props) => {
                 { !onlyRejected && <button className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-full rounded p-1 shadow bg-gray-100' onClick={ onRejected }>Rechazar</button>}
                 <button className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-full rounded p-1 shadow bg-main' onClick={ onAccepted }>Aceptar</button>
             </div>
-        </li>
+        </BaseCard>
     )
 }
