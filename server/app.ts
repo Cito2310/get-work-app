@@ -21,6 +21,18 @@ const getWorks = async() => {
     const worksNodejsBumeran = await getWorksBumeran(page!, "nodejs");
     const worksNodejsComputrabajo = await getWorksComputrabajo(page!, "nodejs");
 
+    const worksDesarrolladorBumeran = await getWorksBumeran(page!, "desarrollador");
+    const worksDesarrolladorComputrabajo = await getWorksComputrabajo(page!, "desarrollador");
+
+    const worksProgramadoresBumeran = await getWorksBumeran(page!, "programadores");
+    const worksProgramadoresComputrabajo = await getWorksComputrabajo(page!, "programadores");
+
+    const worksFrontEndBumeran = await getWorksBumeran(page!, "front-end");
+    const worksFrontEndComputrabajo = await getWorksComputrabajo(page!, "front-end");
+
+    const worksfrontendBumeran = await getWorksBumeran(page!, "frontend");
+    const worksfrontendComputrabajo = await getWorksComputrabajo(page!, "frontend");
+
     return [
         ...worksProgramadorBumeran,
         ...worksProgramadorComputrabajo,
@@ -28,6 +40,14 @@ const getWorks = async() => {
         ...worksReactComputrabajo,
         ...worksNodejsBumeran,
         ...worksNodejsComputrabajo,
+        ...worksDesarrolladorBumeran,
+        ...worksDesarrolladorComputrabajo,
+        ...worksProgramadoresBumeran,
+        ...worksProgramadoresComputrabajo,
+        ...worksFrontEndBumeran,
+        ...worksFrontEndComputrabajo,
+        ...worksfrontendBumeran,
+        ...worksfrontendComputrabajo,
     ];
 }
 
@@ -54,7 +74,8 @@ getWorks().then( value => {
     writeFileSync("data/works.json", JSON.stringify(dataToWrite), "utf-8");
 
     console.log("done");
-    console.log(`Length size: ${valueNotRepeat.length}`)
+    console.log(`Length size: ${value.length}`)
+    console.log(`Length filter size: ${valueNotRepeat.length}`)
 
     const ms = new Date().getTime() - timeStart;
     const min = Math.floor((ms/1000/60) << 0);

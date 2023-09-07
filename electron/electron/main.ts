@@ -5,14 +5,18 @@ import { ipConnection } from './ipcConnection';
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    // width: 800,
+    // height: 600,
+    show: false,
     webPreferences: {
       // contextIsolation: false,
       preload: path.join(__dirname, 'preload.js')
     },
     icon:'icon.png',
   })
+
+  win.maximize();
+  win.show();
 
   if (app.isPackaged) {
     // 'build/index.html'
