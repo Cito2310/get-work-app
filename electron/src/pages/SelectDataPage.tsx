@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, startGetWorks } from '../store';
+import { useAppDispatch, startAddWorks } from '../store';
 import { CardEmpty, ModalSelectData } from '../components';
 import { useDeleteOverflow } from '../hooks';
 
@@ -8,7 +8,7 @@ export const SelectDataPage = () => {
     const dispatch = useAppDispatch();
 
     const onSelectData = async() => {
-        await dispatch( startGetWorks() );
+        await dispatch( startAddWorks() );
         navigate("/filterWorks")
     }
 
@@ -17,24 +17,24 @@ export const SelectDataPage = () => {
 
   return (
     <section>
-      <div className='absolute w-screen h-screen bg-[#00000020]'></div>
-      
-      <ul className='flex flex-col gap-3 px-16 py-3'>
-        <CardEmpty />
-        <CardEmpty />
-        <CardEmpty />
-        <CardEmpty />
-        <CardEmpty />
-        <CardEmpty />
-        <CardEmpty />
-        <CardEmpty />
-        <CardEmpty />
-        <CardEmpty />
-        <CardEmpty />
-        <CardEmpty />
-      </ul>
+        <div className='absolute w-screen h-screen bg-[#00000020]'></div>
+        
+        <ul className='flex flex-col gap-3 px-16 py-3'>
+            <CardEmpty />
+            <CardEmpty />
+            <CardEmpty />
+            <CardEmpty />
+            <CardEmpty />
+            <CardEmpty />
+            <CardEmpty />
+            <CardEmpty />
+            <CardEmpty />
+            <CardEmpty />
+            <CardEmpty />
+            <CardEmpty />
+        </ul>
 
-      <ModalSelectData onSelectData={ onSelectData } />
+        <ModalSelectData onSelectData={ onSelectData } />
     </section>
   )
 }

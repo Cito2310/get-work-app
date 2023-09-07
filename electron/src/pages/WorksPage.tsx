@@ -1,11 +1,13 @@
 import { useAppSelector } from "../store"
 import { CardWork } from "../components";
 import { ModalNotWork } from "../components/modal/ModalNotWork";
-import { joinTextWork } from "../helpers/joinTextWork";
+import { useFilterData } from "../hooks/useFilterData";
 
 export const WorksPage = () => {
     const { data } = useAppSelector( state => state.work )
-    const { currentSearch } = useAppSelector( state => state.search )
+    const { currentSearch, isBeingSearched } = useAppSelector( state => state.search )
+
+    const { dataAccepted, searchDataAccepted } = useFilterData({ currentSearch, data, isBeingSearched });
 
     return (
         <section>
@@ -13,12 +15,9 @@ export const WorksPage = () => {
                 { !data.find( work => work.status === "accepted" ) && <ModalNotWork label="No hay ofertas a mostrar" /> }
 
                 {
-                    currentSearch 
-                    ? data
-                        .filter( work => RegExp( currentSearch, "i" ).test( joinTextWork(work) ) )
-                        .map( work => (work.status === "accepted") && <CardWork work={ work } key={ work.url } />)
-
-                    : data.map( work => (work.status === "accepted") && <CardWork work={ work } key={ work.url } /> )
+                    isBeingSearched 
+                    ? searchDataAccepted.map( work => <CardWork work={ work } key={ work.url } /> )
+                    : dataAccepted.map( work => <CardWork work={ work } key={ work.url } /> )
                 }
             </ul>
         </section>

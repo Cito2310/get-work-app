@@ -25,8 +25,8 @@ export const workSlice = createSlice({
             state.status = action.payload.status;
         },
 
-        setWorks: ( state, action: { payload: WorkOfferExpand[] } ) => {
-            state.data = action.payload;
+        addWorks: ( state, action: { payload: WorkOfferExpand[] } ) => {
+            state.data.push( ...action.payload );
             state.status.dataExists = true;
 
             window.localStorage.setItem("state-work", JSON.stringify(state));
@@ -59,7 +59,7 @@ export const workSlice = createSlice({
 
 
 export const {
-    setWorks,
+    addWorks,
     updateStatus,
     updateViewed,
     setWorksLocalStorage
