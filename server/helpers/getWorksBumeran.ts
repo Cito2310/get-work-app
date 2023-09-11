@@ -19,7 +19,7 @@ export const getWorksBumeran = async ( page: Page, typeWork: string ): Promise<W
 
         await page.goto( createURL( currentPage ) );
 
-        await page.waitForSelector("#listado-avisos")           // espera a que la pagina y las ofertas de carguen
+        await page.waitForSelector("#listado-avisos", { timeout: 7000 })           // espera a que la pagina y las ofertas de carguen
 
         // VARIABLE - OBTIENE UN ARRAY CON UN OBJETO DE LA INFORMACION DE LAS OFERTAS
         const offersWorksPage: WorkOffer[] = await page.evaluate( () => {
@@ -43,8 +43,13 @@ export const getWorksBumeran = async ( page: Page, typeWork: string ): Promise<W
                 // OBTENER EL TITULO DEL TRABAJO
                 const title = children.map( child => {
                     const h3 = child.querySelectorAll("h3");
-                    if ( h3[2]?.textContent === " -" ) return String( h3[4]!.textContent );
-                    return String( h3[2]!.textContent );
+                    try {
+                        if ( h3[2]?.textContent === " -" ) return String( h3[4]!.textContent );
+                        return String( h3[2]!.textContent );
+                        
+                    } catch (error) {
+                        return "Sin titulo"
+                    }
                 })[0];
 
                 // OBTENER LA LOCACION DEL TRABAJO
@@ -73,6 +78,7 @@ export const getWorksBumeran = async ( page: Page, typeWork: string ): Promise<W
 
     } while ( worksFounds.length !== 0 || false );
 
+    console.log(`Bumeran --> Trabajos de ${typeWork} | Cantidad: ${allWorks.length}`)
     allWorks.forEach( work => work.url = baseUrl + work.url )
     return allWorks;
 }

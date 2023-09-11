@@ -21,7 +21,7 @@ export const getWorksComputrabajo = async (page: Page, typeWork: string): Promis
         await page.goto( createURL( currentPage ) );
         
         try {
-            await page.waitForSelector(".js-o-link.fc_base");
+            await page.waitForSelector(".js-o-link.fc_base", { timeout:8000 });
             // VARIABLE - OBTIENE UN ARRAY CON UN OBJETO DE LA INFORMACION DE LAS OFERTAS
             const offersWorksPage = await page.evaluate(()=>{
                 const articles = Array.from( document.querySelectorAll("article") );
@@ -59,7 +59,7 @@ export const getWorksComputrabajo = async (page: Page, typeWork: string): Promis
 
     } while ( worksFounds.length !== 0 || false );
 
-
+    console.log(`Computrabajo --> Trabajos de ${typeWork} | Cantidad: ${allWorks.length}`)
     allWorks.forEach( work => work.url = baseUrl + work.url )
     return allWorks;
 }

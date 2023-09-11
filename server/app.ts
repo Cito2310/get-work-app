@@ -12,25 +12,24 @@ const getWorks = async() => {
     const browser = await puppeteer.launch({ headless: "new" });
     const page = await browser.newPage();
     
+    // page.on('console', (message) => {
+    //     if (message.type() === 'log') console.log(`${message.text()}`);
+    //   });
+
     const worksProgramadorBumeran = await getWorksBumeran(page!, "programador");
-    const worksProgramadorComputrabajo = await getWorksComputrabajo(page!, "programador");
-
     const worksReactBumeran = await getWorksBumeran(page!, "react");
-    const worksReactComputrabajo = await getWorksComputrabajo(page!, "react");
-
     const worksNodejsBumeran = await getWorksBumeran(page!, "nodejs");
-    const worksNodejsComputrabajo = await getWorksComputrabajo(page!, "nodejs");
-
     const worksDesarrolladorBumeran = await getWorksBumeran(page!, "desarrollador");
-    const worksDesarrolladorComputrabajo = await getWorksComputrabajo(page!, "desarrollador");
-
     const worksProgramadoresBumeran = await getWorksBumeran(page!, "programadores");
-    const worksProgramadoresComputrabajo = await getWorksComputrabajo(page!, "programadores");
-
     const worksFrontEndBumeran = await getWorksBumeran(page!, "front-end");
-    const worksFrontEndComputrabajo = await getWorksComputrabajo(page!, "front-end");
-
     const worksfrontendBumeran = await getWorksBumeran(page!, "frontend");
+    
+    const worksProgramadorComputrabajo = await getWorksComputrabajo(page!, "programador");
+    const worksReactComputrabajo = await getWorksComputrabajo(page!, "react");
+    const worksNodejsComputrabajo = await getWorksComputrabajo(page!, "nodejs");
+    const worksDesarrolladorComputrabajo = await getWorksComputrabajo(page!, "desarrollador");
+    const worksProgramadoresComputrabajo = await getWorksComputrabajo(page!, "programadores");
+    const worksFrontEndComputrabajo = await getWorksComputrabajo(page!, "front-end");
     const worksfrontendComputrabajo = await getWorksComputrabajo(page!, "frontend");
 
     return [
@@ -73,7 +72,7 @@ getWorks().then( value => {
 
     writeFileSync("data/works.json", JSON.stringify(dataToWrite), "utf-8");
 
-    console.log("done");
+    console.log("\n\n");
     console.log(`Length size: ${value.length}`)
     console.log(`Length filter size: ${valueNotRepeat.length}`)
 
