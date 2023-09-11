@@ -10,7 +10,7 @@ export const useGetData = () => {
         if ( !dataInLocalStorage ) return;
 
         const currentDate = new Date( new Date().toLocaleDateString() ).getTime();
-        const dayToMs = 86400000;
+        const dayToMs = 86400000 * 2;
 
         let dataParse = JSON.parse( dataInLocalStorage );
         dataParse.data = dataParse.data.filter((work: WorkOfferExpand) => work.date > currentDate-dayToMs );

@@ -16,7 +16,7 @@ export const useOnlySearchData = (
             )
         }
     
-    }, [currentSearch, isBeingSearched])
+    }, [data, currentSearch, isBeingSearched])
     
     return onlySearchData;
 }
