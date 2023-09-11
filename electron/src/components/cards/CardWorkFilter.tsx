@@ -1,4 +1,5 @@
 import { WorkOfferExpand } from '../../../../types';
+import { detectKeywords } from '../../helpers/detectKeywords';
 import { useAppDispatch, updateStatus } from '../../store';
 import { BaseCard } from './BaseCard';
 
@@ -10,12 +11,14 @@ interface props {
 export const CardWorkFilter = ({ work, onlyRejected }: props) => {
     const { companyName, description, location, modality, status, title, url } = work; 
     const dispatch = useAppDispatch();
+    const includeKeyword = detectKeywords( work );
 
     const onRejected = () => dispatch( updateStatus({ urlWork: url, newStatus: "rejected" }) )
     const onAccepted = () => dispatch( updateStatus({ urlWork: url, newStatus: "accepted" }) )
 
     return (
-        <BaseCard className='justify-between gap-8'>
+        // <BaseCard className={`justify-between gap-8`}>
+        <BaseCard className={`justify-between gap-8 ${ includeKeyword ? "border border-green-700" : "" }`}>
             <div className='w-full'>
                 <div className='flex justify-between gap-3'>
                     {
