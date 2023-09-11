@@ -5,5 +5,6 @@ export const detectKeywords = ( workData: WorkOfferExpand ): boolean => {
     const keywords = ["react", "node", "desarrollador", "programador", "front-end", "frontend", "back-end", "backend", "nodejs", "javascript", "typescript", "chaco", "corrientes"];
     const joinText = joinTextWork( workData );
 
-    return keywords.some(  keyword => joinText.includes( keyword ))
+    console.log(joinText)
+    return keywords.some(  keyword => new RegExp(keyword, "i").test(joinText) )
 }
