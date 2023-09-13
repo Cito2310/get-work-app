@@ -3,8 +3,13 @@ import { JSONWorks } from "../../types/jsonWorks"
 declare global {
     interface Window {
         electronAPI: {
-            redirect: ( url: string ) => unknown,
-            getDataWorks: () => Promise<JSONWorks>,
+            getDataWorks:   () => Promise<JSONWorks>,
+
+            redirect:       ( url: string ) => void,
+
+            // Database
+            dbGet:          ( objData: { nameFile: string }) => Promise<any>,
+            dbSave:         ( objData: { nameFile: string, data: string }) => Promise<void>,
         }
     }
 }

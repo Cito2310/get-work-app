@@ -1,3 +1,5 @@
 export type ipcNames = 
     "redirect" |
-    "get-data-works"
+    "get-data-works" |
+    "db-save" |
+    "db-get"
