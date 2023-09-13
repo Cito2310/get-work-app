@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { JSONWorks, WorkOfferExpand } from '../../../../types/';
+import { WorkOfferExpand } from '../../../../types/';
+import { dbSaveWorkState } from '../../helpers/dbSaveWorkState';
 
-interface WorkState {
+export interface WorkState {
     data: WorkOfferExpand[];
     status: {
         dataExists: boolean;
@@ -20,16 +21,16 @@ export const workSlice = createSlice({
     initialState,
     reducers: {
 
-        setWorksLocalStorage: ( state, action: { payload: WorkState } ) => {
-            state.data = action.payload.data;
-            state.status = action.payload.status;
+        setWorks: ( stateWork, action: { payload: WorkState } ) => {
+            stateWork.data = action.payload.data;
+            stateWork.status = action.payload.status;
         },
 
         addWorks: ( state, action: { payload: WorkOfferExpand[] } ) => {
             state.data.push( ...action.payload );
             state.status.dataExists = true;
 
-            window.localStorage.setItem("state-work", JSON.stringify(state));
+            dbSaveWorkState( state );
         },
 
         updateStatus: ( state, action: { payload: { urlWork: string; newStatus: "none" | "rejected" | "accepted" }}) => {
@@ -39,8 +40,7 @@ export const workSlice = createSlice({
                 return work;
             })
 
-            window.localStorage.setItem("state-work", JSON.stringify( state ));
-
+            dbSaveWorkState( state );
         },
 
         updateViewed: ( state, action: { payload: { urlWork: string; newState: boolean }} ) => {
@@ -50,7 +50,7 @@ export const workSlice = createSlice({
                 return work;
             })
 
-            window.localStorage.setItem("state-work", JSON.stringify( state ));
+            dbSaveWorkState( state );
         }
 
     }
@@ -62,6 +62,6 @@ export const {
     addWorks,
     updateStatus,
     updateViewed,
-    setWorksLocalStorage
+    setWorks
 
 } = workSlice.actions;

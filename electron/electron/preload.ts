@@ -10,6 +10,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
     
     // Database
     dbGet:          ( objData: { nameFile: string }) => ipcRenderer.invoke('db-get' as ipcNames, objData),
-    dbSave:         ( objData: { nameFile: string, data: string }) => ipcRenderer.invoke('db-save' as ipcNames, objData),
+    dbSave:         ( objData: { nameFile: string, data: string }) => ipcRenderer.send('db-save' as ipcNames, objData),
 
 })

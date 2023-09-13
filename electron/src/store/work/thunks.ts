@@ -6,8 +6,7 @@ export const startAddWorks = () => {
     return async( dispath: AppDispatch, getState: () => RootState ) => {
 
         const { data, date } = await window.electronAPI.getDataWorks();
-
-        const dateParse = new Date(date).toLocaleDateString();
+        const dateParse = new Date(date).toDateString();
         const msDate = new Date(dateParse).getTime();
 
         const allUrl = getState().work.data.map( work => work.url );

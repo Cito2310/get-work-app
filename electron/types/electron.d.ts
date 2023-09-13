@@ -8,7 +8,7 @@ declare global {
             redirect:       ( url: string ) => void,
 
             // Database
-            dbGet:          ( objData: { nameFile: string }) => Promise<any>,
+            dbGet:          ( objData: { nameFile: string }) => Promise<any | null>,
             dbSave:         ( objData: { nameFile: string, data: string }) => Promise<void>,
         }
     }

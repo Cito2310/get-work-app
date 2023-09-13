@@ -18,14 +18,14 @@ export const ipConnection = () => {
 
 
     ipcMain.handle("db-get" as ipcNames, async(e, args: { nameFile: string })=>{
-        if ( !existsSync("./data/data_products.json") ) return(null);
+        if ( !existsSync(`./data/${args.nameFile}.json`) ) return(null);
         return JSON.parse(readFileSync( `./data/${args.nameFile}.json`, "utf-8" ));
     })
 
 
     ipcMain.on("db-save" as ipcNames, async(e, args: { nameFile: string, data: string })=>{
         if (!existsSync("./data")) mkdirSync("./data");
-        writeFileSync(`./data/${args.nameFile}.json`, JSON.stringify(args.data));
+        writeFileSync(`./data/${args.nameFile}.json`, args.data);
     })
-    
+
 }

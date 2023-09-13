@@ -1,4 +1,4 @@
-import { writeFileSync } from "fs";
+import { existsSync, mkdirSync, writeFileSync } from "fs";
 import puppeteer from "puppeteer";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -69,7 +69,7 @@ getWorks().then( value => {
     }
 
     
-
+    if (!existsSync("./data")) mkdirSync("./data");
     writeFileSync("data/works.json", JSON.stringify(dataToWrite), "utf-8");
 
     console.log("\n\n");
