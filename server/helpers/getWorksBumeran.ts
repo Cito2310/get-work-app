@@ -9,11 +9,16 @@ const baseUrl = "https://www.bumeran.com.ar";
 export const getWorksBumeran = async ( page: Page, typeWork: string ): Promise<WorkOffer[]> => {
     const createURL = ( page: number ) => `${baseUrl}/empleos-publicacion-menor-a-${day}-dias-busqueda-${typeWork}.html?page=${page}`;
 
+
     let allWorks = [];
     let worksFounds;
     let currentPage = 0;
 
     do {
+        // console.log( "\n\n\n")
+        // console.log( typeWork + ' ' + currentPage + ' Bumeran')
+        // console.log( "\n\n\n")
+
         worksFounds = [];   // inicializa un array para guardar todos los trabajo de la pagina actual
         currentPage++;      // aumenta la pagina actual
 
@@ -23,6 +28,10 @@ export const getWorksBumeran = async ( page: Page, typeWork: string ): Promise<W
 
         // VARIABLE - OBTIENE UN ARRAY CON UN OBJETO DE LA INFORMACION DE LAS OFERTAS
         const offersWorksPage: WorkOffer[] = await page.evaluate( () => {
+            // Verificar que hay trabajos validos
+            const existJobs = document.querySelector("h1")?.textContent !== "0 empleos Ayer"
+            if ( !existJobs ) return [];
+
             const div = document.querySelector("#listado-avisos");  // esta es la seccion que contienete todos las ofertas de trabajo
             const children = Array.from(div!.children);             // obtiene todos los hijos de la seccion anterior
     

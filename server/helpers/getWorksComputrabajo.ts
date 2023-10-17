@@ -15,6 +15,14 @@ export const getWorksComputrabajo = async (page: Page, typeWork: string): Promis
     let currentPage = 0;
 
     do {
+        // console.log( "\s")
+        // console.log( "\s")
+        // console.log( "\s")
+        // console.log( typeWork + ' ' + currentPage + ' Computrabajo')
+        // console.log( "\s")
+        // console.log( "\s")
+        // console.log( "\s")
+
         worksFounds = [];   // inicializa un array para guardar todos los trabajo de la pagina actual
         currentPage++;      // aumenta la pagina actual
 
