@@ -9,9 +9,8 @@ interface props {
 }
 
 export const CardWorkFilter = ({ work, onlyRejected }: props) => {
-    const { companyName, description, location, modality, status, title, url } = work; 
+    const { companyName, description, location, modality, status, title, url, includeKeyword } = work; 
     const dispatch = useAppDispatch();
-    const includeKeyword = detectKeywords( work );
 
     const onRejected = () => dispatch( updateStatus({ urlWork: url, newStatus: "rejected" }) )
     const onAccepted = () => dispatch( updateStatus({ urlWork: url, newStatus: "accepted" }) )

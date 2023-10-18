@@ -8,9 +8,8 @@ interface props {
 }
 
 export const CardWork = ({ work }: props) => {
-    const { companyName, description, location, modality, status, title, url, viewed } = work; 
+    const { companyName, description, location, modality, status, title, url, viewed, includeKeyword } = work; 
     const dispatch = useAppDispatch();
-    const includeKeyword = detectKeywords( work );
 
     const onRedirect = () => {
         dispatch( updateViewed({ urlWork: work.url, newState: true }) );

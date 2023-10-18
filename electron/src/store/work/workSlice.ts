@@ -27,8 +27,11 @@ export const workSlice = createSlice({
         },
 
         addWorks: ( state, action: { payload: WorkOfferExpand[] } ) => {
-            state.data.push( ...action.payload );
             state.status.dataExists = true;
+
+            // ORDENAR DATA - Primero los que incluyen palabras claves
+            const newData = [ ...state.data, ...action.payload ];
+            state.data = newData.sort(( a, b ) => Number(b.includeKeyword) - Number(a.includeKeyword) );
 
             dbSaveWorkState( state );
         },

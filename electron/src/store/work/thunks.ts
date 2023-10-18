@@ -1,4 +1,5 @@
 import { WorkOfferExpand } from "../../../../types";
+import { detectKeywords } from "../../helpers/detectKeywords";
 import { AppDispatch, RootState } from "../store"
 import { addWorks } from "./workSlice";
 
@@ -17,10 +18,13 @@ export const startAddWorks = () => {
             viewed: false, 
             status: "none", 
             date: msDate,
+            includeKeyword: detectKeywords( work as WorkOfferExpand ),
         // }))
         })).filter( work => !allUrl.includes( work.url ) );
 
-        dispath( addWorks( dataWithStatusAndViewed ) );
+        const dataSort = dataWithStatusAndViewed.sort((a, b) => Number(b.includeKeyword) - Number(a.includeKeyword) )
+
+        dispath( addWorks( dataSort ) );
         
     }
 }
