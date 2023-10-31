@@ -1,2 +1,2 @@
-export * from "./getWorksBumeran";
+export * from "./getAllWorksBumeran";
 export * from "./getWorksComputrabajo";

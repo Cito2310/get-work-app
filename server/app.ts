@@ -2,50 +2,27 @@ import { existsSync, mkdirSync, writeFileSync } from "fs";
 import puppeteer from "puppeteer";
 import { v4 as uuidv4 } from 'uuid';
 
-import { getWorksBumeran, getWorksComputrabajo } from "./helpers";
+import { getWorksComputrabajo, getAllWorksBumeran } from "./helpers";
 
 import { JSONWorks, WorkOffer } from './../types';
-
 
 
 const getWorks = async() => {
     const browser = await puppeteer.launch({ headless: "new" });
     const page = await browser.newPage();
     
-    // page.on('console', (message) => {
-    //     if (message.type() === 'log') console.log(`${message.text()}`);
-    //   });
-
-    const worksProgramadorBumeran = await getWorksBumeran(page!, "programador");
-    const worksReactBumeran = await getWorksBumeran(page!, "react");
-    const worksNodejsBumeran = await getWorksBumeran(page!, "nodejs");
-    const worksDesarrolladorBumeran = await getWorksBumeran(page!, "desarrollador");
-    const worksProgramadoresBumeran = await getWorksBumeran(page!, "programadores");
-    const worksFrontEndBumeran = await getWorksBumeran(page!, "front-end");
-    const worksfrontendBumeran = await getWorksBumeran(page!, "frontend");
+    const allWorkBumeran = await getAllWorksBumeran(page);
     
-    const worksProgramadorComputrabajo = await getWorksComputrabajo(page!, "programador");
-    const worksReactComputrabajo = await getWorksComputrabajo(page!, "react");
-    const worksNodejsComputrabajo = await getWorksComputrabajo(page!, "nodejs");
-    const worksDesarrolladorComputrabajo = await getWorksComputrabajo(page!, "desarrollador");
-    const worksProgramadoresComputrabajo = await getWorksComputrabajo(page!, "programadores");
-    const worksFrontEndComputrabajo = await getWorksComputrabajo(page!, "front-end");
-    const worksfrontendComputrabajo = await getWorksComputrabajo(page!, "frontend");
+    const worksReactComputrabajo = await getWorksComputrabajo(page, "react");
+    const worksNodejsComputrabajo = await getWorksComputrabajo(page, "node");
+    const worksDesarrolladorComputrabajo = await getWorksComputrabajo(page, "desarrollador");
+    const worksfrontendComputrabajo = await getWorksComputrabajo(page, "frontend");
 
     return [
-        ...worksProgramadorBumeran,
-        ...worksProgramadorComputrabajo,
-        ...worksReactBumeran,
+        ...allWorkBumeran,
         ...worksReactComputrabajo,
-        ...worksNodejsBumeran,
         ...worksNodejsComputrabajo,
-        ...worksDesarrolladorBumeran,
         ...worksDesarrolladorComputrabajo,
-        ...worksProgramadoresBumeran,
-        ...worksProgramadoresComputrabajo,
-        ...worksFrontEndBumeran,
-        ...worksFrontEndComputrabajo,
-        ...worksfrontendBumeran,
         ...worksfrontendComputrabajo,
     ];
 }

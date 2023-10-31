@@ -1,13 +1,10 @@
 import { Page } from "puppeteer"
 import { WorkOffer } from "../../types/workOffer";
 
-
-const day = 1;
 const baseUrl = "https://ar.computrabajo.com";
 
-
 export const getWorksComputrabajo = async (page: Page, typeWork: string): Promise<WorkOffer[]> => {
-    const createURL = ( page: number ) => `${baseUrl}/trabajo-de-${typeWork}?pubdate=${day}&p=${page}`;
+    const createURL = ( page: number ) => `${baseUrl}/trabajo-de-${typeWork}?pubdate=1&p=${page}`;
 
 
     let allWorks = [];
@@ -15,14 +12,6 @@ export const getWorksComputrabajo = async (page: Page, typeWork: string): Promis
     let currentPage = 0;
 
     do {
-        // console.log( "\s")
-        // console.log( "\s")
-        // console.log( "\s")
-        // console.log( typeWork + ' ' + currentPage + ' Computrabajo')
-        // console.log( "\s")
-        // console.log( "\s")
-        // console.log( "\s")
-
         worksFounds = [];   // inicializa un array para guardar todos los trabajo de la pagina actual
         currentPage++;      // aumenta la pagina actual
 
@@ -33,20 +22,14 @@ export const getWorksComputrabajo = async (page: Page, typeWork: string): Promis
             // VARIABLE - OBTIENE UN ARRAY CON UN OBJETO DE LA INFORMACION DE LAS OFERTAS
             const offersWorksPage = await page.evaluate(()=>{
                 const articles = Array.from( document.querySelectorAll("article") );
-        
+
                 const parseOffers = articles.map( article => {
                     const title = article.querySelector(".js-o-link")?.innerHTML;
                     const url = article.querySelector(".js-o-link")?.getAttribute("href");
                     const companyName = article.querySelector("[offer-grid-article-company-url]")?.innerHTML;
                     const modality = article.querySelector(".tag.base.mb10")?.textContent || null;
-        
-                    // OBTENER LOCACION
-                    const textWithLocation = article.querySelector(".fs16.fc_base.mt5.mb5")?.textContent;
-                    const arrayWithText = textWithLocation?.split(/\n\s+/g).filter( txt => txt );
-                    const removedNumber = arrayWithText?.filter( str => !/[0-9.]/g.test(str) )
-                    
-                    const location = removedNumber?.length === 2 ? removedNumber[1] : removedNumber![0];
-                    
+                    const location = article.querySelectorAll(".fs16.fc_base.mt5")[1].textContent || null;
+                   
                     return {
                         title: title || "",
                         url: url || "",

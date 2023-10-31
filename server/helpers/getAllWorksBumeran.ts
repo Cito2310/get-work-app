@@ -1,24 +1,16 @@
 import { Page } from "puppeteer";
 import { WorkOffer } from "../../types/workOffer";
 
-
-const day = 1;
 const baseUrl = "https://www.bumeran.com.ar";
 
-
-export const getWorksBumeran = async ( page: Page, typeWork: string ): Promise<WorkOffer[]> => {
-    const createURL = ( page: number ) => `${baseUrl}/empleos-publicacion-menor-a-${day}-dias-busqueda-${typeWork}.html?page=${page}`;
-
+export const getAllWorksBumeran = async ( page: Page ): Promise<WorkOffer[]> => {
+    const createURL = ( page: number ) => `${baseUrl}/empleos-publicacion-hoy.html?page=${page}`;
 
     let allWorks = [];
     let worksFounds;
     let currentPage = 0;
 
     do {
-        // console.log( "\n\n\n")
-        // console.log( typeWork + ' ' + currentPage + ' Bumeran')
-        // console.log( "\n\n\n")
-
         worksFounds = [];   // inicializa un array para guardar todos los trabajo de la pagina actual
         currentPage++;      // aumenta la pagina actual
 
@@ -87,7 +79,7 @@ export const getWorksBumeran = async ( page: Page, typeWork: string ): Promise<W
 
     } while ( worksFounds.length !== 0 || false );
 
-    console.log(`Bumeran --> Trabajos de ${typeWork} | Cantidad: ${allWorks.length}`)
+    console.log(`Bumeran --> Trabajos de Bumeran | Cantidad: ${allWorks.length}`)
     allWorks.forEach( work => work.url = baseUrl + work.url )
     return allWorks;
 }
