@@ -1,0 +1,1 @@
+export type TIcon = "plus" | "lens" | "heart" | "xcross" | "outbox" | "bars";

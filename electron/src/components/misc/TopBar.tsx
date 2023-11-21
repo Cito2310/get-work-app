@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { useSearch } from '../hooks';
+import { useSearch } from '../../hooks';
 
 export const TopBar = () => {
     const { register } = useSearch();    

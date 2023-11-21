@@ -1,6 +1,6 @@
 import { useAppSelector } from "../store"
 import { CardWorkFilter, ModalNotWork } from "../components";
-import { SideBarFilter } from "../components/SideBarFilter";
+import { SideBarFilter } from "../components/misc/SideBarFilter";
 import { useFilterData } from "../hooks/useFilterData";
 import { useOnlyRejected } from "../hooks/useOnlyRejected";
 

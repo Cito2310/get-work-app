@@ -1,6 +1,6 @@
 import { WorkOfferExpand } from "../../../../types";
-import { detectKeywords } from "../../helpers/detectKeywords";
 import { updateViewed, useAppDispatch } from "../../store";
+import { WorkCardButton } from "../button/WorkCardButton";
 import { BaseCard } from "./BaseCard";
 
 interface props {
@@ -8,7 +8,7 @@ interface props {
 }
 
 export const CardWork = ({ work }: props) => {
-    const { companyName, description, location, modality, status, title, url, viewed, includeKeyword } = work; 
+    const { companyName, description, location, modality, title, url, viewed, includeKeyword } = work; 
     const dispatch = useAppDispatch();
 
     const onRedirect = () => {
@@ -17,28 +17,28 @@ export const CardWork = ({ work }: props) => {
     };
 
     return (
-        // <BaseCard className={`justify-between gap-8`}>
-        <BaseCard className={`justify-between gap-8 ${ includeKeyword ? "border border-green-700" : "" }`}>
-            <div className='w-full'>
-                <div className='flex justify-between gap-3'>
-                    {
-                        companyName
-                        ? <h2 className='font-Montserrat font-medium'>{`${title} - ${companyName}`}</h2>
-                        : <h2 className='font-Montserrat font-medium'>{`${title}`}</h2>
-                    }
-                    <p className='font-Montserrat text-xs text-right whitespace-nowrap'>{`${location} - ${modality}`}</p>
-                </div>
+        <BaseCard className="min-h-[100px]" border={ includeKeyword }>
+            <div className="w-full">
+                <div className="flex font-Montserrat gap-[16px] justify-between">
 
-                <p className='text-sm'>{ description }</p>
+                    <h2 className="font-semibold text-card-title font-Montserrat">{
+                            companyName ? `${companyName} - ${title}` : title 
+                    }</h2>
+
+                    <p className="font-light text-small">{`${location} - ${modality}`}</p> 
+
+                </div>
+                
+                <p className="text-regular font-normal">{ description }</p>
             </div>
 
-            <div className='flex flex-col gap-3'>
-                <button 
-                    className='hover:brightness-90 active:brightness-75 transition-base w-[100px] h-full rounded p-1 shadow bg-main' 
-                    onClick={ onRedirect }
-                >
-                    {viewed ? "\u2713 Link" : "Link"}
-                </button>
+            <div className="flex gap-[8px]">
+                <WorkCardButton 
+                    onClick={onRedirect} 
+                    className={`h-full w-[40px] ${ viewed && "text-black"}`}
+                    color="primary" 
+                    icon="outbox"
+                />
             </div>
         </BaseCard>
     )

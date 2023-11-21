@@ -5,14 +5,12 @@ import { BaseCard } from './BaseCard';
 
 interface props {
     work: WorkOfferExpand;
-    onlyRejected?: boolean;
 }
 
-export const CardWorkFilter = ({ work }: props) => {
+export const CardWorkRejected = ({ work }: props) => {
     const { companyName, description, location, modality, title, url, includeKeyword } = work; 
     const dispatch = useAppDispatch();
 
-    const onRejected = () => dispatch( updateStatus({ urlWork: url, newStatus: "rejected" }) )
     const onAccepted = () => dispatch( updateStatus({ urlWork: url, newStatus: "accepted" }) )
 
     return (
@@ -22,19 +20,19 @@ export const CardWorkFilter = ({ work }: props) => {
 
                     <h2 className="font-semibold text-card-title font-Montserrat">{
                         companyName ? `${companyName} - ${title}` : title 
-                    }</h2>
+                    }</h2> 
 
                     <p className="font-light text-small flex gap-3">
                         {`${location} - ${modality}`}
+                        <p className='text-danger'>ELIMINADO</p>
                     </p> 
 
                 </div>
-
+                
                 <p className="text-regular font-normal">{ description }</p>
             </div>
 
             <div className="flex gap-[8px]">
-                <WorkCardButton onClick={onRejected} className="h-full w-[40px]" color="secondary" icon="xcross"/>
                 <WorkCardButton onClick={onAccepted} className="h-full w-[40px]" color="primary" icon="heart"/>
             </div>
         </BaseCard>
