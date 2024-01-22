@@ -17,6 +17,8 @@ const getWorks = async() => {
     const worksNodejsComputrabajo = await getWorksComputrabajo(page, "node");
     const worksDesarrolladorComputrabajo = await getWorksComputrabajo(page, "desarrollador");
     const worksfrontendComputrabajo = await getWorksComputrabajo(page, "frontend");
+    const worksfullStackComputrabajo = await getWorksComputrabajo(page, "fullStack");
+    const worksDeveloperComputrabajo = await getWorksComputrabajo(page, "developer");
 
     return [
         ...allWorkBumeran,
@@ -24,6 +26,8 @@ const getWorks = async() => {
         ...worksNodejsComputrabajo,
         ...worksDesarrolladorComputrabajo,
         ...worksfrontendComputrabajo,
+        ...worksDeveloperComputrabajo,
+        ...worksfullStackComputrabajo,
     ];
 }
 

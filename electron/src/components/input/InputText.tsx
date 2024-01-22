@@ -12,7 +12,7 @@ interface props {
     submit?: boolean;
 }
 
-export const InputText = ({ icon, placeholder, register, border, className, submit }: props) => {
+export const InputText = ({ icon, placeholder, register, border, className, submit, onClick }: props) => {
     return (
         <div className={`rounded-[6px] bg-font-white flex flex-row justify-between gap-[16px] ${border && "border border-gray-300"} ${className}`}>
             <input
@@ -22,7 +22,7 @@ export const InputText = ({ icon, placeholder, register, border, className, subm
             />
 
             { icon && 
-                <button type={ submit ? "submit" : "button" } className="px-[12px] text-gray-300 hover:text-gray-200 transition-base active:text-font-black">
+                <button type={ submit ? "submit" : "button" } onClick={ onClick } className="px-[12px] text-gray-300 hover:text-gray-200 transition-base active:text-font-black">
                     <Icons className="text-[1.3em]" icon={ icon } />
                 </button>
             }

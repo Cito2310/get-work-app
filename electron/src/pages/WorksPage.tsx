@@ -1,7 +1,7 @@
 import { useAppSelector } from "../store"
-import { CardWork } from "../components";
-import { ModalNotWork } from "../components/modal/ModalNotWork";
 import { useFilterData } from "../hooks/useFilterData";
+import { Alert } from "../components/misc/Alert";
+import { CardWork } from "../components/cards/CardWork";
 
 export const WorksPage = () => {
     const { data } = useAppSelector( state => state.work )
@@ -12,7 +12,7 @@ export const WorksPage = () => {
     return (
         <section>
             <ul className="flex flex-col gap-3 px-16 py-3">
-                { !data.find( work => work.status === "accepted" ) && <ModalNotWork label="No hay ofertas a mostrar" /> }
+                { !data.find( work => work.status === "accepted" ) && <Alert title="No hay ofertas a mostrar" /> }
 
                 {
                     isBeingSearched 

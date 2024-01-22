@@ -1,7 +1,7 @@
 interface props {
     className?: string;
     children: string;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 export const MenuButton = ({ className, children, onClick }: props) => (

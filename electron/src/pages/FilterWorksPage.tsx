@@ -1,8 +1,8 @@
 import { useAppSelector } from "../store"
-import { CardWorkFilter, ModalNotWork } from "../components";
-import { SideBarFilter } from "../components/misc/SideBarFilter";
 import { useFilterData } from "../hooks/useFilterData";
 import { useOnlyRejected } from "../hooks/useOnlyRejected";
+import { CardWorkFilter } from "../components/cards/CardWorkFilter";
+import { Alert } from "../components/misc/Alert";
 
 export const FilterWorksPage = () => {
     const { data } = useAppSelector( state => state.work );
@@ -15,10 +15,10 @@ export const FilterWorksPage = () => {
 
     return (
         <section>
-            <SideBarFilter onOnlyRejected={onOnlyRejected} onlyRejected={onlyRejected} />
+            {/* <SideBarFilter onOnlyRejected={onOnlyRejected} onlyRejected={onlyRejected} /> */}
 
             <ul className="flex flex-col gap-3 px-16 py-3">
-                { data.length === 0 && <ModalNotWork label="No has seleccionado ningun dato" /> }
+                { data.length === 0 && <Alert title="No has seleccionado ningun dato" /> }
 
                 { onlyRejected === true && 
                     (
