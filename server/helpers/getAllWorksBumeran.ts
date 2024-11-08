@@ -4,7 +4,7 @@ import { WorkOffer } from "../../types/workOffer";
 const baseUrl = "https://www.bumeran.com.ar";
 
 export const getAllWorksBumeran = async ( page: Page ): Promise<WorkOffer[]> => {
-    const createURL = ( page: number ) => `${baseUrl}/empleos-publicacion-ayer.html?page=${page}`;
+    const createURL = ( page: number ) => `${baseUrl}/empleos-publicacion-menor-a-2-dias.html?page=${page}`;
 
     let allWorks = [];
     let worksFounds;
